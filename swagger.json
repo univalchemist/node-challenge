@@ -1,0 +1,576 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRUD Project",
+    "description": "Movie Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+      "JWT": {
+          "type": "apiKey",
+          "name": "x-access-token",
+          "in": "header"
+      }
+  },
+  "paths": {
+    "/actors": {
+      "post": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "Actors"
+        ],
+        "description": "Create new actor",
+        "parameters": [
+          {
+            "name": "actor",
+            "in": "body",
+            "description": "Actor that we want to create",
+            "schema": {
+              "$ref": "#/definitions/createUpdateActor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New actor is created",
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "summary": "Get all actors",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Actors"
+            }
+          }
+        }
+      }
+    },
+    "/actors/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of actor that we want to find",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "Actors"
+        ],
+        "summary": "Get actor for given ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Delete actor with given ID",
+        "tags": [
+          "Actors"
+        ],
+        "responses": {
+          "200": {
+            "description": "Actor is deleted",
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Update actor with give ID",
+        "tags": [
+          "Actors"
+        ],
+        "parameters": [
+          {
+            "name": "actor",
+            "in": "body",
+            "description": "Actor with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/createUpdateActor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Actor is updated",
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        }
+      }
+    },
+    "/movies": {
+      "post": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "Movies"
+        ],
+        "description": "Create new movie",
+        "parameters": [
+          {
+            "name": "movie",
+            "in": "body",
+            "description": "Movie that we want to create",
+            "schema": {
+              "$ref": "#/definitions/createUpdateMovie"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New movie is created",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get all movies",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Movies"
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of movie that we want to find",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get movie for given ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Delete movie with given ID",
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie is deleted",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Update movie with give ID",
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "movie",
+            "in": "body",
+            "description": "Movie with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/createUpdateMovie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie is updated",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        }
+      }
+    },
+    "/movie-ratings": {
+      "post": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "MovieRatings"
+        ],
+        "description": "Create new movie rating",
+        "parameters": [
+          {
+            "name": "movieRating",
+            "in": "body",
+            "description": "Movie Rating that we want to create",
+            "schema": {
+              "$ref": "#/definitions/createUpdateMovieRating"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New movie rating is created",
+            "schema": {
+              "$ref": "#/definitions/MovieRating"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MovieRatings"
+        ],
+        "summary": "Get all movie ratings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MovieRating"
+            }
+          }
+        }
+      }
+    },
+    "/movie-ratings/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of movie rating that we want to find",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "security": [ { "JWT": [] } ],
+        "tags": [
+          "MovieRatings"
+        ],
+        "summary": "Get movie rating for given ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MovieRating"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Delete movie rating with given ID",
+        "tags": [
+          "MovieRatings"
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie rating is deleted",
+            "schema": {
+              "$ref": "#/definitions/MovieRating"
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [ { "JWT": [] } ],
+        "summary": "Update movie rating with give ID",
+        "tags": [
+          "MovieRatings"
+        ],
+        "parameters": [
+          {
+            "name": "movie rating",
+            "in": "body",
+            "description": "Movie rating with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/createUpdateMovieRating"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie rating is updated",
+            "schema": {
+              "$ref": "#/definitions/MovieRating"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Actor": {
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+        }
+    },
+    "Actors": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number"
+        },
+        "rows": {
+          "type": "array",
+          "$ref": "#/definitions/Actor"
+        }
+      }
+    },
+    "createUpdateActor": {
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "Movie": {
+      "required": [
+        "title",
+        "year",
+        "actorId"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            }
+          }
+        },
+        "movieRating": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "rating": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "Movies": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number"
+        },
+        "rows": {
+          "type": "array",
+          "$ref": "#/definitions/Movie"
+        }
+      }
+    },
+    "createUpdateMovie": {
+      "required": [
+        "title",
+        "year",
+        "actorId"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "actorId": {
+          "type": "number"
+        }
+      }
+    },
+    "MovieRating": {
+      "required": [
+        "rating",
+        "movieId"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "movie": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "title": {
+              "type": "string"
+            },
+            "year": {
+              "type": "string"
+            },
+            "actor": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "MovieRatings": {
+      "type": "array",
+      "$ref": "#/definitions/MovieRating"
+    },
+    "createUpdateMovieRating": {
+      "required": [
+        "rating",
+        "movieId"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "movieId": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
+
